@@ -1,15 +1,15 @@
 // First draft for Yelp Camp application
-const express = require('express');
-const res = require('express/lib/response');
-const mongoose = require('mongoose');
-const path = require('path');
-const { title } = require('process');
-const Campground = require('./models/campground'); // Capitalized because it is a Model
-const methodOverride = require('method-override');
-const ejsMate = require('ejs-mate');
-const catchAsync = require('./utils/catchAsync');
-const ExpressError = require('./utils/ExpressError');
-const { join } = require('path');
+const express = require("express");
+const res = require("express/lib/response");
+const mongoose = require("mongoose");
+const path = require("path");
+const { title } = require("process");
+const Campground = require("./models/campground"); // Capitalized because it is a Model
+const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
+const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
+const { join } = require("path");
 const { campgroundSchema, reviewSchema } = require("./schemas");
 const Review = require("./models/review");
 const { isError } = require("joi");
@@ -123,7 +123,7 @@ app.delete(
 app.get(
   "/campgrounds/:id",
   catchAsync(async (req, res) => {
-    // Show page for singular campground
+    // Show page for singular campgrounds
     const { id } = req.params;
     const campground = await Campground.findById(id);
     res.render("campgrounds/show", { campground });
@@ -143,18 +143,18 @@ app.post(
   })
 );
 
-app.all('*', (req, res, next) => {
-    // Run on any path (*) if nothing else is matched
-    next(new ExpressError('Page Not Found', 404)); // This will be passed onto the error handler through next()
-})
+app.all("*", (req, res, next) => {
+  // Run on any path (*) if nothing else is matched
+  next(new ExpressError("Page Not Found", 404)); // This will be passed onto the error handler through next()
+});
 
 // Add Express Error handler
 app.use((err, req, res, next) => {
-    const { statusCode = 500 } = err;
-    if (!err.message) err.message = 'Oh No, Something Went Wrong!';
-    res.status(statusCode).render('error', { err })
-})
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Oh No, Something Went Wrong!";
+  res.status(statusCode).render("error", { err });
+});
 
 app.listen(3000, () => {
-    console.log("LISTENING ON 3000")
-})
+  console.log("LISTENING ON 3000");
+});
