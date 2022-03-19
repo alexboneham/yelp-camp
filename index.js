@@ -125,7 +125,7 @@ app.get(
   catchAsync(async (req, res) => {
     // Show page for singular campgrounds
     const { id } = req.params;
-    const campground = await Campground.findById(id);
+    const campground = await Campground.findById(id).populate("reviews");
     res.render("campgrounds/show", { campground });
   })
 );
