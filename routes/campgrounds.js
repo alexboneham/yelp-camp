@@ -59,6 +59,7 @@ router.put(
       { new: true }
     );
     // Used spread here in vid, not sure why. Also don't need new: true
+    req.flash("success", "Successfully updated campground");
     res.redirect(`/campgrounds/${campground._id}`);
   })
 );
@@ -67,6 +68,7 @@ router.delete(
   "/:id",
   catchAsync(async (req, res) => {
     await Campground.findByIdAndDelete(req.params.id);
+    req.flash("success", "Successfully deleted campground");
     res.redirect("/campgrounds");
   })
 );
