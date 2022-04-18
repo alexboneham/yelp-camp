@@ -1,8 +1,8 @@
-module.exports = func => {
-    return (req, res, next) => {
-        func(req, res, next).catch(next);
-    }
-}
+module.exports = (func) => {
+  return (req, res, next) => {
+    func(req, res, next).catch(next);
+  };
+};
 
 // Logic is as follows:
 //     return a function,
