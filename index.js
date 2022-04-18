@@ -37,6 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+// Set up sessions and flash
 const sessionConfig = {
   secret: "thisshouldbeabettersecret",
   resave: false,
@@ -55,6 +56,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+// Flash middleware
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
