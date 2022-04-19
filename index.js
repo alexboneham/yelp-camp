@@ -1,18 +1,13 @@
 // First draft for Yelp Camp application
 const express = require('express');
 const app = express();
-const res = require('express/lib/response');
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
-const { title } = require('process');
-const Campground = require('./models/campground'); // Capitalized because it is a Model
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
-const { join } = require('path');
-const { isError } = require('joi');
 
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
