@@ -47,19 +47,20 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
-// Flash middleware
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-});
-
 app.use(passport.initialize());
 app.use(passport.session()); // Must be after session middleware
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// Set res.locals for Flash middleware & req.user variable
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 // ROUTES
 // app.get('/', (req, res) => {
