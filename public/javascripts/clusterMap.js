@@ -1,10 +1,13 @@
 mapboxgl.accessToken = mbxToken;
 const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/light-v10',
+  container: 'cluster-map',
+  style: 'mapbox://styles/mapbox/outdoors-v11',
   center: [-103.5917, 40.6699],
   zoom: 3,
 });
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
 
 map.on('load', () => {
   // Add a new source from our GeoJSON data and
